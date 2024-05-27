@@ -1,4 +1,4 @@
-import { BooksActionTypes, BooksAction, BooksInfo } from "../../types/booksStoreTypes"
+import { BooksActionTypes,  BooksInfo } from "../../types/booksStoreTypes"
 
 export const BooksAddAction = (payload: BooksInfo[]): any => {
      return { type: BooksActionTypes.BOOKS_ADD, payload: payload}
