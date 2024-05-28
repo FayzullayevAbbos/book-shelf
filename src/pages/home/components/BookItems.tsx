@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import {
   ListItem,
@@ -16,16 +18,12 @@ import {
   BooksRemoveAction,
 } from "../../../redax/actions/books";
 
-interface Book {
-  id: number;
-  isbn: string;
-}
 
 interface BookItemProps {
-  book: Book;
+  book: any;
 }
 
-const BookItem: React.FC<BookItemProps> = ({ book }) => {
+const BookItem: React.FC<BookItemProps> = ({ book }:BookItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [delLoading, setDelLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(book.isbn);
@@ -103,7 +101,9 @@ const BookItem: React.FC<BookItemProps> = ({ book }) => {
 };
 
 export default BookItem;
-function BooksStatusAction(Id: number): any {
+
+
+function BooksStatusAction(_Id: number): any {
   throw new Error("Function not implemented.");
 }
 
