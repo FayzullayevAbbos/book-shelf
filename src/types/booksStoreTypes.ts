@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export enum BooksActionTypes {
   BOOKS_ADD = "BOOKS_ADD",
   BOOKS_REMOVE = "BOOKS_REMOVE",
