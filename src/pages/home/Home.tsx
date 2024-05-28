@@ -1,55 +1,28 @@
-import React from "react";
+import { Box, CssBaseline } from "@mui/material";
+
+import { Outlet} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import SideBar from "./components/SideBar";
 
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
-import { useToken } from "../../hooks/useToken";
-import Content from "../../components/content/Contents";
 
-const Home: React.FC = () => {
-  const { email } = useToken((state) => state.auth.info);
-
-  const handleLogout = () => {
-    localStorage.setItem("token", "");
-  };
+function Home() {
+ 
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='static'>
-          <Toolbar>
-            <Typography
-              variant='h6'
-              component='div'
-              sx={{ flexGrow: 1 }}
-            >
-              MyBook
-            </Typography>
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Typography component='div' sx={{ mx: 1 }}>
-                {email}
-              </Typography>
-              <Button color='inherit' onClick={handleLogout}>
-                Logout
-              </Button>
-            </Box>
-          </Toolbar>
-        </AppBar>
+      <CssBaseline />
+      <Box sx={{ display: "flex" }}>
+        <Navbar />
+        <SideBar />
+        <Box component='main' sx={{ flexGrow: 1, p: 3, mt: 8 }}>
+          <Outlet />
+        </Box>
       </Box>
-      <Content />
+
     </>
   );
-};
+}
 
 export default Home;

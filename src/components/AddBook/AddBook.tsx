@@ -30,16 +30,20 @@ export const AddBookForm: React.FC = () => {
     const url = "/books";
     const body = { isbn: isbn };
     const headers = { key: key, secret: secret };
+    console.log(isbn);
 
     setLoading(true);
     postUpdate("POST", body, headers, url).then((res) => {
-      if (!res.isOk) dispatch(BooksErrorAction(res.message));
-      else {
+      if (!res.isOk) {
+        console.log("xato");
+
+        dispatch(BooksErrorAction(res.message));
+      } else {
         dispatch(BooksAddAction([res.data]));
         setIsbn("");
       }
       setLoading(false);
-    });
+    }); 
   };
 
   return (

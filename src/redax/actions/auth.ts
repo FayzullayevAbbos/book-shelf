@@ -1,6 +1,6 @@
 import {
   AuthActionTypes,
-  AuthAction,
+
   UserInfo,
 } from "../../types/authStoreTypse";
 
@@ -14,6 +14,6 @@ export const AuthErrorAction = (
   return { type: AuthActionTypes.AUTH_ERROR, payload: payload };
 };
 
-export const AuthRemoveAction = (): AuthAction => {
+export const AuthRemoveAction = (): any => {
   return { type: AuthActionTypes.AUTH_REMOVE };
 };

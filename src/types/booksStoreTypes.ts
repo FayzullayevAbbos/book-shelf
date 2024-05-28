@@ -15,6 +15,7 @@ export interface BooksInfo {
 }
 
 export interface BooksState {
+  map(arg0: (book: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   books: Array<BooksInfo>;
   error: string;
   success: string;
