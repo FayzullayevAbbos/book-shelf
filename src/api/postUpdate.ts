@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { API } from "./apiUrl";
 import MD5 from "crypto-js/md5";
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { List, Box, Button } from "@mui/material";
 import BookItem from "./BookItems";
@@ -10,7 +11,7 @@ import {
 } from "../../../redax/actions/books";
 import { AllBooksProps, Book } from "./AllBooks";
 
-export const AllBooks: React.FC<AllBooksProps> = ({}) => {
+export const AllBooks: React.FC<AllBooksProps> = () => {
   const { books, auth } = useToken((state) => state);
   const dispatch = useDispatch();
   const handleGetAllBooks = () => {
@@ -43,12 +44,14 @@ export const AllBooks: React.FC<AllBooksProps> = ({}) => {
           <BookItem
             key={book.id}
             book={book}
-            updateBook={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            
           />
         ))}
       </List>
     </Box>
   );
 };
+function setIsLoading(_arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+

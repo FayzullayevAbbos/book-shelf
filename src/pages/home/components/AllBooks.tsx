@@ -1,22 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { List, Box, Button } from "@mui/material";
 import BookItem from "./BookItems";
 import { useToken } from "../../../hooks/useToken";
 import { useDispatch } from "react-redux";
 import fetchAuth from "../../../api/fetchAuth";
-import {
-  BooksAddAction,
-  BooksErrorAction,
-} from "../../../redax/actions/books";
-interface Book {
+import { BooksAddAction, BooksErrorAction } from "../../../redax/actions/books";
+
+
+
+export interface Book {
   id: number;
   title: string;
 }
 
+export interface AllBooksProps {
+  deleteBook: (id: number) => void;
+  updateBook: (book: Book) => void;
+}
+
 const AllBooks: React.FC = () => {
+ 
   const { books, auth } = useToken((state) => state);
   const dispatch = useDispatch();
   const handleGetAllBooks = () => {
+    
     fetchAuth(
       { key: auth.info.key, secret: auth.info.secret },
       "/books",
@@ -28,20 +36,23 @@ const AllBooks: React.FC = () => {
           ),
         );
       else dispatch(BooksErrorAction(res.message));
+     
     });
   };
-  console.log(books.books);
+console.log(books.books);
 
   return (
     <Box>
+
       <h2>All Books</h2>
-      <Button variant='contained' onClick={handleGetAllBooks}>
-        {" "}
-        all books
-      </Button>
+      <Button  variant="contained" onClick={handleGetAllBooks} > all books</Button>
       <List>
-        {books.books?.map((book: Book) => (
-          <BookItem key={book.id} book={book} />
+       
+        {books.books?.map((book:Book) => (
+          <BookItem
+            key={book.id}
+            book={book}             
+          />
         ))}
       </List>
     </Box>

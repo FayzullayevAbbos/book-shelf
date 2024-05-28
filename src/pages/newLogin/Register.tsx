@@ -1,5 +1,4 @@
 import {
-
   CircularProgress,
   Container,
   FormHelperText,
@@ -11,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { API } from "../../api/apiUrl";
 
-
 interface ISignForm {
   name: string;
   email: string;
@@ -22,37 +20,34 @@ function Register() {
   const { handleSubmit, control } = useForm<ISignForm>();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [isOk, setIsOk] = useState<boolean>(false)
+  const [isOk, setIsOk] = useState<boolean>(false);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     console.log(data);
 
     setLoading(true);
-    return fetch(`${API}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Key: data.key,
-        Sign: data.secret,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        response.ok ? navigate("/login") : setIsOk(true);
-      
-        response.json();
-      })
-      .then((e) => {
-        setLoading(false);
-
-        console.log(e);
-      })
-      .catch((e) => {
-        console.log("error 46");
-
-        setLoading(false);
-        
+    try {
+      const response = await fetch(`${API}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Key: data.key,
+          Sign: data.secret,
+        },
+        body: JSON.stringify(data),
       });
+      response.ok ? navigate("/login") : setIsOk(true);
+
+      response.json();
+      const e = undefined;
+      setLoading(false);
+
+      console.log(e);
+    } catch (e_1) {
+      console.log("error 46");
+
+      setLoading(false);
+    }
   });
 
   return (
@@ -67,20 +62,18 @@ function Register() {
       }}
       sx={{ boxShadow: 3 }}
     >
-      
       <div className='form_wrap'>
         {loading && (
           <div style={{ textAlign: "center", marginBottom: "10px" }}>
             <CircularProgress />
           </div>
         )}
-        {
-          isOk && (
-            <FormHelperText
-              style={{ textAlign: "center" }}
-              error={true}
-              children='Incorrect username or password'
-            />
+        {isOk && (
+          <FormHelperText
+            style={{ textAlign: "center" }}
+            error={true}
+            children='Incorrect username or password'
+          />
         )}
         <Typography variant='h4' gutterBottom={true} align='center'>
           Sign up
