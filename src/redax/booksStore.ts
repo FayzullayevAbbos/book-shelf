@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
+import { JSX } from "react/jsx-runtime";
 import {
   BooksActionTypes,
   BooksInfo,
@@ -9,6 +13,9 @@ const initialState: BooksState = {
   books: [],
   error: "",
   success: "",
+  map: function (_arg0: (book: any) => JSX.Element): ReactNode {
+    throw new Error("Function not implemented.");
+  }
 };
 
 export const booksReducer = (
